@@ -22,6 +22,7 @@
 
     <section id="highscorePage">
         <h2>High Scores</h2>
+        <h2 id="highscores-list"></h2>
 
         <button onclick="theFront()" id="back">Back</button>
 
@@ -31,11 +32,12 @@
         <h2 id="questionPlace"></h2>
 
         <ul>
-            <li><button onclick="questions() .getChoice()(this.id)" id="one"></button></li>
-            <li><button onclick="getChoice()(this.id)" id="two"></button></li>
-            <li><button onclick="getChoice()(this.id)" id="three"></button></li>
-            <li><button onclick="getChoice()(this.id)" id="four"></button></li>
+            <li><button onclick="getChoice(this.id)" id="one"></button></li>
+            <li><button onclick="getChoice(this.id)" id="two"></button></li>
+            <li><button onclick="getChoice(this.id)" id="three"></button></li>
+            <li><button onclick="getChoice(this.id)" id="four"></button></li>
         </ul>
+        <h2 id="correct-incorrect"> </h2>
 
 
     </section>
