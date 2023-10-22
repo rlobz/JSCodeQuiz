@@ -14,7 +14,7 @@ header {
     margin-top: 10px;
 }
 
-body, h1 {
+body, h1, ul {
     margin: 0;
     padding: 0;
 }
@@ -24,11 +24,12 @@ body {
     background-color: #f4f4f4;
 }
 
-h2 {
+h2, p {
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 10px;
 }
+
 
 #start, #back {
   
@@ -37,9 +38,48 @@ h2 {
     border-style: none;
     border-radius: 5px;
     cursor: pointer;
+    
+
     color: white;
     background-color:#333;
+
+   
     margin: 0 auto;
     display: block;
     margin-top: 40px;
+
+   
+}
+
+ul {
+  
+    list-style-type: none;
+}
+
+li button{
+
+    list-style-type: none;
+    padding: 7px 30px 7px 12px;
+    font-size: 20px;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0px 0px 160px;
+
+    color: white;
+    background-color:#333;
+    display: inline
+    
+
+}
+
+
+
+
+#highscorePage {
+    display: none;
+}
+
+#questionsPage {
+    display: none;
 }

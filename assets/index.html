@@ -15,7 +15,8 @@
     </header>
     
     <section id="frontPage">
-        <button onclick="theQuestions()" id="start">Start Quiz</button>
+        <p>Please press the button below to start the quiz</p>
+        <button onclick="questions()" id="start">Start Quiz</button>
         
     </section>
 
@@ -24,6 +25,24 @@
 
         <button onclick="theFront()" id="back">Back</button>
 
+    </section>
+
+    <section id="questionsPage">
+        <h2 id="questionPlace"></h2>
+
+        <ul>
+            <li><button onclick="questions() .getChoice()(this.id)" id="one"></button></li>
+            <li><button onclick="getChoice()(this.id)" id="two"></button></li>
+            <li><button onclick="getChoice()(this.id)" id="three"></button></li>
+            <li><button onclick="getChoice()(this.id)" id="four"></button></li>
+        </ul>
+
+
+    </section>
+
+    <footer>
+        <h3 id="choiceResult"></h3>
+    </footer>
 
     <script src="./js/script.js"></script>
 </body>
