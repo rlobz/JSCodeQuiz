@@ -1,3 +1,5 @@
+//GIVEN I am taking a code quiz
+
 var timer = document.getElementById("timer");
 var startButton = document.getElementById("start");
 var frontPage = document.getElementById("frontPage");
@@ -8,19 +10,24 @@ var two = document.getElementById("two");
 var three = document.getElementById("three");
 var four = document.getElementById("four");
 var correctIncorrect = document.getElementById("correct-incorrect");
-var highscorePage = document.getElementById("highscorePage");
+var highscoresPage = document.getElementById("highscorePage");
 var highscores = document.getElementById("highscores");
 var back = document.getElementById("back");
 var highscoresList = document.getElementById("highscores-list");
+var allDone = document.getElementById("allDonePage");
+var finalScore = document.getElementById("final-score");
+var clearHighscores = document.getElementById("clear-highscores");
+var initials = document.getElementById("inputdefault");
+var submitInitials = document.getElementById("submit-initials");
 
 function scores() {
     frontPage.style.display = "none";
-    highscorePage.style.display = "block";
+    highscoresPage.style.display = "block";
     questionsPage.style.display = "none";
 }
 
 function theFront() {
-    highscorePage.style.display = "none";
+    highscoresPage.style.display = "none";
     frontPage.style.display = "block";
   }
 
@@ -58,14 +65,20 @@ var myQuestions = [
       },
 ];
 
+//WHEN I click the start button
+//THEN a timer starts and I am presented with a question
+//WHEN I answer a question
+//THEN I am presented with another question
+//WHEN all questions are answered or the timer reaches 0
+//THEN the game is over
 
     var userScore = 0;
-    var timeLeft = 120;
+    var timeLeft = 90;
     var questionIndex = 0;
     
     function startQuiz() {
       userScore = 0;
-      timeLeft = 120;
+      timeLeft = 90;
       var timeInterval = setInterval(function() {
         timer.textContent = "" + timeLeft;
         timeLeft--;
@@ -83,8 +96,9 @@ var myQuestions = [
       questionsPage.style.display = "block";
       frontPage.style.display = "none";
       showQuestion(questionIndex);
+      startQuiz();
     }
-    
+
     function showQuestion(index) {
       if (index < myQuestions.length) {
         var currentQuestion = myQuestions[index];
@@ -97,7 +111,10 @@ var myQuestions = [
         endGame();
       }
     }
-    
+
+//WHEN I answer a question incorrectly
+//THEN time is subtracted from the clock
+
     function checkAnswer(userChoice) {
       var currentQuestion = myQuestions[questionIndex];
       if (userChoice === currentQuestion.correct) {
@@ -113,10 +130,69 @@ var myQuestions = [
     }
     
     function endGame() {
-    
-      questionsPage.style.display = "none";
       
+      questionIndex = 0;
+      questionsPage.style.display = "none";
+      highscoresPage.style.display = "none";
+      frontPage.style.display = "none";
+      allDone.style.display = "block";
+      finalScore.textContent = "Your final score is: " + userScore;
     }
+
+//WHEN the game is over
+//THEN I can save my initials and my score  
+
+var userHighscores = [];
+
+function addHighscore(event) {
+  questionsPage.style.display = "none";
+  allDone.style.display = "none";
+  frontPage.style.display = "none";
+  highscoresPage.style.display = "block";
+  
+    highscoresList.innerHTML = "";
+  for (var j = 0; j < userHighscores.length; j++) {
+    var userHighscore = userHighscores[j];
+
+    var li = document.createElement("li");
+    li.textContent = userHighscore;
+    li.setAttribute("data-index", j);
+    highscoresList.appendChild(li);
+  }
+}
+  var getHighscores = function() {
+  var loggedHighscores = JSON.parse(localStorage.getItem("userHighscores"));
+  if (userHighscores !== null) {
+    userHighscores = loggedHighscores;
+  }
+  addHighscore();
+}
+  var storeHighscore = function() {
+  localStorage.setItem("userHighscores", JSON.stringify(userHighscores));
+}
+  
+submitInitials.addEventListener("click", function(event) {
+  event.preventDefault();
+  var userInitialsScore = inputdefault.value + " - " + userScore;
+  if (userInitialsScore === "") {
+    return;
+  }
+
+  userHighscores.push(userInitialsScore);
+  inputdefault.value = "";
+  storeHighscore();
+  getHighscores();
+});
+
+var clearScores = function(event) {
+  localStorage.clear();
+  userHighscores = [];
+  console.log(userHighscores)
+  highscoresList.textContent = "";
+  console.log(localStorage);
+  checkHighscore();
+}
+
     
     startButton.addEventListener("click", startQuiz);
     
@@ -133,20 +209,15 @@ var myQuestions = [
       checkAnswer(four.textContent);
     });
     
+    back.addEventListener("click", frontPage);
+    highscores.addEventListener("click", checkHighscore);
+    clearHighscores.addEventListener("click", clearScores);
 
-//GIVEN I am taking a code quiz
 
-//WHEN I click the start button
-//THEN a timer starts and I am presented with a question
 
-//WHEN I answer a question
-//THEN I am presented with another question
 
-//WHEN I answer a question incorrectly
-//THEN time is subtracted from the clock
 
-//WHEN all questions are answered or the timer reaches 0
-//THEN the game is over
 
-//WHEN the game is over
-//THEN I can save my initials and my score
+
+
+

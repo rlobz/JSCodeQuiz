@@ -31,7 +31,7 @@ h2, p {
 }
 
 
-#start, #back {
+#start, #back, #clear-highscores, #submit-initials {
   
     padding: 7px 12px 7px 12px;
     font-size: 15px;
@@ -48,15 +48,19 @@ h2, p {
     display: block;
     margin-top: 40px;
 
-   
 }
 
 ul {
   
     list-style-type: none;
 }
+label, input {
+    
 
-li button{
+
+}
+
+li button {
 
     list-style-type: none;
     padding: 7px 30px 7px 12px;
@@ -74,12 +78,13 @@ li button{
 }
 
 
-
-
 #highscorePage {
     display: none;
 }
 
 #questionsPage {
+    display: none;
+}
+#allDonePage {
     display: none;
 }

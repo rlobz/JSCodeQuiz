@@ -25,6 +25,7 @@
         <h2 id="highscores-list"></h2>
 
         <button onclick="theFront()" id="back">Back</button>
+        <button onclick="clearHighscores()" id="clear-highscores">Clear Highscores</button>
 
     </section>
 
@@ -38,13 +39,17 @@
             <li><button onclick="getChoice(this.id)" id="four"></button></li>
         </ul>
         <h2 id="correct-incorrect"> </h2>
-
-
     </section>
 
-    <footer>
-        <h3 id="choiceResult"></h3>
-    </footer>
+    <section id="allDonePage">
+        <h2>All Done!</h2>
+        <h2 id="final-score"></h2>
+        <div class="form-group"></div>
+        <label for="inputdefault">Enter initials</label>
+        <input class="form-control" id="inputdefault" type="text">
+        <button onclick="scores()" id="submit-initials">Submit</button>
+    </div>
+    </section>
 
     <script src="./js/script.js"></script>
 </body>
