@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
     <title>JSCodeQuiz</title>
 </head>
 <body>
@@ -25,18 +25,18 @@
         <h2 id="highscores-list"></h2>
 
         <button onclick="theFront()" id="back">Back</button>
-        <button onclick="clearHighscores()" id="clear-highscores">Clear Highscores</button>
+        <button onclick="clearScores()" id="clear-highscores">Clear Highscores</button>
 
     </section>
 
     <section id="questionsPage">
         <h2 id="questionPlace"></h2>
-
+        
         <ul>
-            <li><button onclick="getChoice(this.id)" id="one"></button></li>
-            <li><button onclick="getChoice(this.id)" id="two"></button></li>
-            <li><button onclick="getChoice(this.id)" id="three"></button></li>
-            <li><button onclick="getChoice(this.id)" id="four"></button></li>
+            <li><button onclick="checkAnswer(0)" id="one"></button></li>
+            <li><button onclick="checkAnswer(1)" id="two"></button></li>
+            <li><button onclick="checkAnswer(2)" id="three"></button></li>
+            <li><button onclick="checkAnswer(3)" id="four"></button></li>
         </ul>
         <h2 id="correct-incorrect"> </h2>
     </section>
@@ -48,10 +48,9 @@
         <label for="inputdefault">Enter initials</label>
         <input class="form-control" id="inputdefault" type="text">
         <button onclick="scores()" id="submit-initials">Submit</button>
-    </div>
     </section>
 
-    <script src="./js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
