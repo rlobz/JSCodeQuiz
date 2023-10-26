@@ -18,50 +18,80 @@ var finalScore = document.getElementById("final-score");
 var clearHighscores = document.getElementById("clear-highscores");
 var initials = document.getElementById("inputdefault");
 var submitInitials = document.getElementById("submit-initials");
+var timeInterval;
+var isGameOver = false;
+var gameStarted = false;
+var gameStartedAndFinished = false;
+
+
+
+
 
 function scores() {
-    frontPage.style.display = "none";
-    highscoresPage.style.display = "block";
-    questionsPage.style.display = "none";
+  frontPage.style.display = "none";
+  highscoresPage.style.display = "block";
+  questionsPage.style.display = "none";
 }
 
 function theFront() {
+  if (gameStartedAndFinished) {
+    gameStartedAndFinished = false;
+    gameStarted = false;
+    questionIndex = 0;
+    timer.textContent = "";
     highscoresPage.style.display = "none";
+    questionsPage.style.display = "none";
     frontPage.style.display = "block";
+    return;
   }
+  if (gameStarted) {
+    highscoresPage.style.display = "none";
+    questionsPage.style.display = "block";
+    return;
+  } else {
+  isGameOver = true;
+  timer.textContent = "";
+  highscoresPage.style.display = "none";
+  frontPage.style.display = "block";
+}}
 
 
 var myQuestions = [
-    {
-        question: "The three fundamental programming languages of the modern web are: HTML, CSS, and _________.",
-        answer: ["Dothraki", "Hebrew", "JavaScript", "HTML"],
-        correct: 2
-    },
-    { 
-        question: "Variables are the _______ of programming.",
-        answer: ["verbs", "icebergs", "whales", "nouns"],
-        correct: 3
-    },
-    { 
-        question: "Which identifier will surround a string in JavaScript?",
-        answer: ["bulbs", "lampshades", "quotation marks", "parentheses"],
-        correct: 2
-    },
-    { 
-        question: "Where will the \"console.log()\" method display data?",
-        answer: ["in the garden", "in the browser", "in the console", "in the toolbar"],
-        correct: 2
-    },
-    { 
-        question: "When an alert is executed it will popup in the _____",
-        answer: ["console", "browser", "dictionary", "atmosphere"],
-        correct: 1
-    },
-    {
-        question: "empty question",
-        answer: ["---", "---", "---", "---"],
-        correct: 0
-      },
+  {
+    question: "Which of the following is NOT a JavaScript framework or library?",
+    answer: ["Vue.js", "Angular", "Laravel", "React"],
+    correct: 2
+  },
+  {
+    question: "Which method can be used to decode a JSON string",
+    answer: ["JSON.stringify()", "JSON.decode()", "JSON.toArray()", "JSON.parse()"],
+    correct: 3
+  },
+  {
+    question: "The three fundamental programming languages of the modern web are: HTML, CSS, and _________.",
+    answer: ["Dothraki", "Hebrew", "JavaScript", "HTML"],
+    correct: 2
+  },
+  { 
+    question: "Variables are the _______ of programming.",
+    answer: ["verbs", "icebergs", "whales", "nouns"],
+    correct: 3
+  },
+  { 
+    question: "Which identifier will surround a string in JavaScript?",
+    answer: ["bulbs", "lampshades", "quotation marks", "parentheses"],
+    correct: 2
+  },
+  { 
+    question: "Where will the \"console.log()\" method display data?",
+    answer: ["in the garden", "in the browser", "in the console", "in the toolbar"],
+    correct: 2
+  },
+  { 
+    question: "When an alert is executed it will popup in the _____",
+    answer: ["console", "browser", "dictionary", "atmosphere"],
+    correct: 1
+  },
 ];
 
 //WHEN I click the start button
@@ -76,10 +106,19 @@ var myQuestions = [
     var questionIndex = 0;
     
     function startQuiz() {
-      userScore = 0;
-      timeLeft = 90;
-      var timeInterval = setInterval(function() {
+      if (!gameStarted) {
+        gameStarted = true;
+        isGameOver = false;
+        userScore = 0;
+        timeLeft = 90;
+        correctIncorrect.textContent = "";
+        timeInterval = setInterval(function() {
+          if (isGameOver) {
+          clearInterval(timeInterval)
+          return;
+        }
         timer.textContent = "" + timeLeft;
+        console.log("Time left:", timeLeft);
         timeLeft--;
     
         if (timeLeft <= 0 || questionIndex >= myQuestions.length) {
@@ -88,7 +127,8 @@ var myQuestions = [
           endGame();
         }
       }, 1000);
-      showQuestion(questionIndex);
+    }
+    showQuestion(questionIndex);
     }
     
     function questions() {
@@ -130,13 +170,16 @@ var myQuestions = [
 
     
     function endGame() {
-      
+      gameStartedAndFinished = true
+      isGameOver = true;
+      clearInterval(timeInterval);
       questionIndex = 0;
       questionsPage.style.display = "none";
       highscoresPage.style.display = "none";
       frontPage.style.display = "none";
       allDone.style.display = "block";
-      finalScore.textContent = "Your final score is: " + userScore;
+      finalScore.textContent = "Your final score is: " + timeLeft;
+      clearInterval(timeInterval);
     }
 
 //WHEN the game is over
@@ -144,10 +187,10 @@ var myQuestions = [
 
 var userHighscores = [];
 
-function addHighscore(event) {
+function addHighscore() {
   var loggedHighscores = JSON.parse(localStorage.getItem("userHighscores"));
-  if (loggedHighscores !== null) {
-      userHighscores = loggedHighscores;
+  if (Array.isArray(loggedHighscores) && loggedHighscores !== null) {
+    userHighscores = loggedHighscores;
   }
 
   questionsPage.style.display = "none";
@@ -171,18 +214,18 @@ function addHighscore(event) {
   
 submitInitials.addEventListener("click", function(event) {
   event.preventDefault();
-  var userInitialsScore = inputdefault.value + " - " + userScore;
+  var userInitialsScore = initials.value + " - " + timeLeft;
   if (userInitialsScore === "") {
     return;
   }
 
   userHighscores.push(userInitialsScore);
-  inputdefault.value = "";
+  initials.value = "";
   storeHighscore();
   addHighscore();
 });
 
-var clearScores = function(event) {
+var clearScores = function() {
   localStorage.clear();
   userHighscores = [];
   console.log(userHighscores)
@@ -196,8 +239,6 @@ var clearScores = function(event) {
   
     highscores.addEventListener("click", addHighscore);
     clearHighscores.addEventListener("click", clearScores);
-
-
 
 
 

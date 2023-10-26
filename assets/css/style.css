@@ -29,8 +29,9 @@ h2, p {
     font-size: 20px;
     margin-bottom: 10px;
 }
-#inputdefault {
-    margin: 0px 4px 0px;
+#allDonePage {
+    text-align: center;
+    padding-top: 20px;
 }
 
 #start, #back, #clear-highscores, #submit-initials {
@@ -48,7 +49,7 @@ h2, p {
    
     margin: 0 auto;
     display: block;
-    margin-top: 40px;
+    margin-top: 30px;
 
 }
 
