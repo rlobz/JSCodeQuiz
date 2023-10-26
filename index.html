@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
-    <title>JSCodeQuiz</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <title>JSCodeQuiz</title>
+    </head>
 <body>
     <header>
-        
         <h1>Java Script Code Quiz</h1>
         <button onclick="scores()" id="highscores">View Highscores</button>
         <h2>Time: <span id="timer"></span></h2>
     </header>
-    
+    <div>
     <section id="frontPage">
-        <p>Please press the button below to start the quiz.</p>
+        <h2>Please press the button below to start the quiz.</h2>
         <p>Be aware that each incorrect answer will cost you ten seconds off your time/score.</p>
         <button onclick="questions()" id="start">Start Quiz</button>
         
@@ -23,7 +23,7 @@
 
     <section id="highscorePage">
         <h2>High Scores</h2>
-        <h2 id="highscores-list"></h2>
+        <h2 id="highscores-list">High Scores List</h2>
 
         <button onclick="theFront()" id="back">Back</button>
         <button onclick="clearScores()" id="clear-highscores">Clear Highscores</button>
@@ -31,7 +31,7 @@
     </section>
 
     <section id="questionsPage">
-        <h2 id="questionPlace"></h2>
+        <h2 id="questionPlace">Questions</h2>
         
         <ul>
             <li><button onclick="checkAnswer(0)" id="one"></button></li>
@@ -39,18 +39,18 @@
             <li><button onclick="checkAnswer(2)" id="three"></button></li>
             <li><button onclick="checkAnswer(3)" id="four"></button></li>
         </ul>
-        <h2 id="correct-incorrect"> </h2>
+        <h2 id="correct-incorrect">Correct or Incorrect</h2>
     </section>
 
     <section id="allDonePage">
         <h2>All Done!</h2>
-        <h2 id="final-score"></h2>
+        <h2 id="final-score">Final Score</h2>
         <div class="form-group"></div>
         <label for="inputdefault">Enter initials</label>
         <input class="form-control" id="inputdefault" type="text">
         <button onclick="scores()" id="submit-initials">Submit</button>
     </section>
-
+</div>
     <script src="assets/js/script.js"></script>
 </body>
 
